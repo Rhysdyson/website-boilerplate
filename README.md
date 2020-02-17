@@ -1,6 +1,6 @@
 # Website Boilerplate (Sass & Gulp 4)
 
-This is my personal boilerplate for web dev. Gulp compiles and compresses Sass and JS (inspired by [@thecodercoder:](https://github.com/thecodercoder/frontend-boilerplate), compresses image and places these in the [public](./_public) directory, ready for pushing. 
+This is my personal boilerplate for web dev. Gulp compiles and compresses Sass and JS (inspired by [@thecodercoder](https://github.com/thecodercoder/frontend-boilerplate), compresses image and places these in the [public](./_public) directory, ready for pushing. 
 
 # Tools
 - Sass/Scss

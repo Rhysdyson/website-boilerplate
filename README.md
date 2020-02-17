@@ -1,9 +1,12 @@
-# Website Boilerplate
-This is my custom boilerplate for web development. It includes a gulp file for code and image compression and migration into a public/launch directory.
+# Website Boilerplate (Sass & Gulp 4)
+
+@thecodercoder 
+
+This is my personal boilerplate for web dev. Gulp compiles and compresses Sass and JS (inspired by @thecodercoder), compresses image and places these in the [public](./_public) directory, ready for pushing. 
 
 # Tools
-- SASS
-- Gulp
+- Sass/Scss
+- Gulp 4
 
 # Gulp Commands
 

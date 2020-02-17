@@ -30,6 +30,8 @@
     watch
     1. Checks for any sass, scss or js file changes, then re-runs the code compilers and cachebuster.
 
+    init
+    1. Creates a new file tree for a new project.
 */
 
 /* ===================================
@@ -37,6 +39,7 @@
 =================================== */
 
 // GULP INITIALISATION
+const gulp = require('gulp');
 const { src, dest, watch, series, parallel } = require('gulp');
 const clean = require ('gulp-clean');
 
@@ -50,6 +53,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 var replace = require('gulp-replace');
+var shell = require('gulp-shell');
 
 // FILE PATHS
 const path = {
@@ -238,3 +242,30 @@ function imageClean(){
          	.pipe(clean({ force: true }) // Force allows clean to run outside the current directory.
   );
 }
+
+/*
+  INITIALISATION TASK:
+  Creates base directories to begin a new project.
+*/
+gulp.task('init', function () {
+    return gulp.src('*.*', {read: false})
+        // Create _public directory
+        .pipe(gulp.dest('./_public'))
+        .pipe(gulp.dest('./_public/css'))
+        .pipe(gulp.dest('./_public/fonts'))
+        .pipe(gulp.dest('./_public/img'))
+        .pipe(gulp.dest('./_public/js'))
+        // Create assets directory
+        .pipe(gulp.dest('./assets'))
+        .pipe(gulp.dest('./assets/css'))
+          .pipe(gulp.dest('./assets/css/1-setup'))
+          .pipe(gulp.dest('./assets/css/2-elements'))
+          .pipe(gulp.dest('./assets/css/3-components'))
+          .pipe(gulp.dest('./assets/css/4-pages'))
+        .pipe(gulp.dest('./assets/icons'))
+        .pipe(gulp.dest('./assets/images'))
+        .pipe(gulp.dest('./assets/js'))
+          .pipe(gulp.dest('./assets/js/1-setup'))
+          .pipe(gulp.dest('./assets/js/2-elements'))
+          .pipe(gulp.dest('./assets/js/3-components'))
+});

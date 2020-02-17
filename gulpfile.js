@@ -22,7 +22,7 @@
     img
     1. imageTask: Compress all images, deliver to public directory.
 
-    Clean
+    clean
     1. Deletes code and image files from public directory.
     2. Runs code compiles and delivers to public directory.
     3. Runs image compression.

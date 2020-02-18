@@ -131,6 +131,14 @@ exports.watch = series(
   watchTask
 );
 
+/*
+  COMMAND: "init"
+  Builds asset and _public directories
+*/
+exports.init = series(
+  directoryTask
+);
+
 /* ===================================
           TASKS / FUNCTIONS
 =================================== */
@@ -247,25 +255,65 @@ function imageClean(){
   INITIALISATION TASK:
   Creates base directories to begin a new project.
 */
-gulp.task('init', function () {
-    return gulp.src('*.*', {read: false})
-        // Create _public directory
-        .pipe(gulp.dest('./_public'))
-        .pipe(gulp.dest('./_public/css'))
-        .pipe(gulp.dest('./_public/fonts'))
-        .pipe(gulp.dest('./_public/img'))
-        .pipe(gulp.dest('./_public/js'))
-        // Create assets directory
-        .pipe(gulp.dest('./assets'))
-        .pipe(gulp.dest('./assets/css'))
-          .pipe(gulp.dest('./assets/css/1-setup'))
-          .pipe(gulp.dest('./assets/css/2-elements'))
-          .pipe(gulp.dest('./assets/css/3-components'))
-          .pipe(gulp.dest('./assets/css/4-pages'))
-        .pipe(gulp.dest('./assets/icons'))
-        .pipe(gulp.dest('./assets/images'))
-        .pipe(gulp.dest('./assets/js'))
-          .pipe(gulp.dest('./assets/js/1-setup'))
-          .pipe(gulp.dest('./assets/js/2-elements'))
-          .pipe(gulp.dest('./assets/js/3-components'))
-});
+function directoryTask() {
+  return gulp.src('*.*', {read: false})
+
+  /*
+    ASSETS DIRECTORY
+  */
+
+  /*
+    STYLES
+  */
+
+    // CSS/1-setup
+    .pipe(gulp.dest('./assets/css/1-setup'))
+      .pipe(shell(['type nul > assets/css/1-setup/_typography.sass']))
+      .pipe(shell(['type nul > assets/css/1-setup/_variables.sass']))
+
+    // CSS/2-elements
+    .pipe(gulp.dest('./assets/css/2-elements'))
+      .pipe(shell(['type nul > assets/css/2-elements/_buttons.sass']))
+      .pipe(shell(['type nul > assets/css/2-elements/_images.sass']))
+
+    // CSS/3-components
+    .pipe(gulp.dest('./assets/css/3-components'))
+      .pipe(shell(['type nul > assets/css/3-components/_header.sass']))
+      .pipe(shell(['type nul > assets/css/3-components/_footer.sass']))
+      .pipe(shell(['type nul > assets/css/3-components/_nav.scss']))
+
+    // CSS/4-pages
+    .pipe(gulp.dest('./assets/css/4-pages'))
+      .pipe(shell(['type nul > assets/css/4-pages/_main.sass']))
+
+    /*
+      SCRIPTS
+    */
+
+      // JS/1-setup
+      .pipe(gulp.dest('./assets/js/1-setup'))
+
+      // JS/2-elements
+      .pipe(gulp.dest('./assets/js/2-elements'))
+
+      // JS/3-elements
+      .pipe(gulp.dest('./assets/js/3-components'))
+        .pipe(shell(['type nul > assets/js/3-components/_nav.js']))
+
+      /*
+        IMAGES
+      */
+      .pipe(gulp.dest('./assets/icons'))
+      .pipe(gulp.dest('./assets/images'))
+
+  /*
+    PUBLIC DIRECTORY
+  */
+  .pipe(gulp.dest('./public/css')) // Create css directory
+    .pipe(shell(['type nul > public/css/main.css'])) // Create main.css
+  .pipe(gulp.dest('./public/js')) // Create js directory
+    .pipe(shell(['type nul > public/js/main.js'])) // Create main.js
+  .pipe(gulp.dest('./public/img')) // Create img directory
+    .pipe(gulp.dest('./public/img/ico')) // Create icon directory
+  .pipe(gulp.dest('./public/fonts')) // Create fonts directory
+}
